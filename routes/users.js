@@ -51,4 +51,6 @@ router.put("/api/v1/approve/:id", userController.userApprove);
 // user get data
 router.get("/api/v1/user-detail",authenticateToken, userController.userDetail );
 
+
+
 module.exports = router;
