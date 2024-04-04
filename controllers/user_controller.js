@@ -30,11 +30,11 @@ var userController = {
                     console.log(userInstance.userName);
 
                     // create token for user
-                    let token = await jwt.sign({userEmail:userInstance.userEmail, userName:userInstance.userName}, SECRET, {algorithm: 'HS256'});
+                    let token = await jwt.sign({userEmail:userInstance.userEmail, userName:userInstance.userName, userRole:userInstance.userRole}, SECRET, {algorithm: 'HS256'});
                     console.log("token = ", token);
 
                     // ถ้า password ถูก ให้ return ดังนี้
-                   return res.status(200).json({
+                    return res.status(200).json({
                     message:"Login Sucessful",
                     data: token
                     
@@ -56,6 +56,33 @@ var userController = {
                         })}
             
         } catch (error) {   
+            res.status(500).send(error.toString());
+        }
+    },
+    userApprove: async (req,res) =>{
+        try {
+            // เอา parmas id ของ user ที่เราต้องการจะอัพเดทก่อน
+            const {id} = req.params;
+            // const id = "1234"
+            // console.log("id user = ", id);
+            // เรียกใช้งาน model เพื่อทำการ update userApprove
+            const userUpdateInstacne = await User.findByIdAndUpdate(id, {userApprove: true})
+            if(userUpdateInstacne){
+                console.log("update success");
+                return  res.status(201).json({
+                        message:"User Approved Successfully!",
+                        data: userUpdateInstacne
+                })
+            } else {
+                console.log("update fails");
+                return  res.status(400).json({
+                    message:"User Approved Fails!",
+                    data: []
+            })
+            }
+            
+
+        } catch(error) {
             res.status(500).send(error.toString());
         }
     }

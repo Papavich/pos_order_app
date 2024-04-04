@@ -34,14 +34,15 @@ router.post("/api/v1/register", async (req,res) => {
         mesage: "create user successful",
         data: user 
     });
-
     } catch (error){
-        res.status(500).send(error.toString())
+        res.status(500).send(error.toString());
     }
 });
 
 // route login 
-router.post("/api/v1/login", userController.userLogin)
+router.post("/api/v1/login", userController.userLogin);
 
+// approve by admin
+router.put("/api/v1/approve/:id", userController.userApprove);
 
 module.exports = router;
