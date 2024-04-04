@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require("bcrypt");
 
+// middleware
+const authenticateToken = require("../services/checkUserToken");
+
 // import model 
 const Users = require("../models/user_model");
 
@@ -44,5 +47,8 @@ router.post("/api/v1/login", userController.userLogin);
 
 // approve by admin
 router.put("/api/v1/approve/:id", userController.userApprove);
+
+// user get data
+router.get("/api/v1/user-detail",authenticateToken, userController.userDetail );
 
 module.exports = router;

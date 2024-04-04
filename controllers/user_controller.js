@@ -94,6 +94,15 @@ var userController = {
         } catch(error) {
             res.status(500).send(error.toString());
         }
+    },
+    userDetail: (req,res)=>{
+        try {
+            res.status(200).json({
+                message : 'Get User Detail',
+            })
+        } catch (error) {
+            res.status(500).send(error.toString());
+        } 
     }
 }
 
