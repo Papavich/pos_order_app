@@ -22,8 +22,11 @@ router.delete("/api/v1/products/:id", authenticateToken, productController.delet
 
 
 //show all product
-router.get("/api/v1/products", productController.showAllProducts) 
+router.get("/api/v1/products", authenticateToken, productController.showAllProducts) 
 
+
+// show product by id
+router.get("/api/v1/products/:id", authenticateToken, productController.showProductById)
 
 // export product route
 module.exports = router;

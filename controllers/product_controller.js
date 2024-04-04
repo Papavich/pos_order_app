@@ -97,19 +97,46 @@ var productController = {
     },
     showAllProducts: async (req,res) => {
         try {
-            
             let allProductsInstance = await Product.find({});
             // console.table(allProductsInstance);
             res.status(201).json({
-                status : 201 ,
+                status : 201,
                 data: allProductsInstance
-            })
+            });
         } catch(error) {
             console.log(error);
             res.status(400).json({
                 status: 400,
                 message:"Fails to Show All Products"
-            })
+            });
+        }
+    },
+    showProductById: async (req, res) => {
+        try {
+            // รับค่า params 
+            const {id} = req.params;
+            console.log(id);
+            
+            let productInstance = await Product.findById(id);
+            console.log(productInstance);
+            if(productInstance){
+                return  res.status(201).json({
+                        status: 201,
+                        message: "Successfully got the product by id",
+                        data: productInstance
+                });
+            } else {
+                return res.status(400).json({
+                    status: 400,
+                    message: "Product Not Found"
+                });
+            }
+        } catch(error) {
+            console.log(error);
+            res.status(400).json({
+                status: 400,
+                message: "Fails to fetch product by Id"
+            });
         }
     }
 }

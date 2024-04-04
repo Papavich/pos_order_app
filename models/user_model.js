@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
+
 const userSchema = new mongoose.Schema({
+
     userName: {
         type: String,
         unique: true,
@@ -14,7 +16,6 @@ const userSchema = new mongoose.Schema({
     userPassword: {
         type: String,
         require: true,
-    
     },
     userRole: {
         type: String,
@@ -24,6 +25,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     }
+
 },{timestamps: true});
 
 // create model 
