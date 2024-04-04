@@ -12,13 +12,13 @@ const  productController = require("../controllers/product_controller");
 // router
 
 // add product
-router.post("/api/v1/products",authenticateToken, productController.addProduct);
+router.post("/api/v1/products", authenticateToken, productController.addProduct);
 
 // update product
-router.put("/api/v1/products/:id", productController.updateProduct)
+router.put("/api/v1/products/:id", authenticateToken, productController.updateProduct)
 
 // delete product 
-router.delete("/api/v1/products/:id",authenticateToken, productController.deleteProduct);
+router.delete("/api/v1/products/:id", authenticateToken, productController.deleteProduct);
 
 // export product route
 module.exports = router;

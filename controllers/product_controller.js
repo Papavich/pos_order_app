@@ -63,15 +63,33 @@ var productController = {
         try {
             // get product id by params 
             const {id} = req.params;
-            console.log(id);
+            // console.log(id);
 
-            res.status(201).json({
-                message:"Update product successful",
-                // data:
-            })
+            // get dara from body
+            const {productName, productAmount} = req.body;
+            console.table(req.body);
+
+            // find by id and update
+            const productUpdateInstance = await Product.findByIdAndUpdate(id,{productName:productName, productAmount:productAmount});
+            console.log(productUpdateInstance);
+            if(productUpdateInstance) {
+                return res.status(201).json({
+                    status: 201,
+                    message:"Update product successful",
+                    // data:
+                });
+            } else {
+                return res.status(400).json({
+                    status: 400,
+                    message:"Update product fails",
+                    // data:
+                })
+            }
+            
         } catch(error) {
             console.log(err);
             res.status(400).json({
+                status: 400,
                 message:"Fails to update product",
                 error
             })
