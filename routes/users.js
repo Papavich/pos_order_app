@@ -5,6 +5,9 @@ var bcrypt = require("bcrypt");
 // import model 
 const Users = require("../models/user_model");
 
+// import user controller;
+const userController = require("../controllers/user_controller");
+
 // create user api
 router.post("/api/v1/register", async (req,res) => {
     try {
@@ -36,6 +39,9 @@ router.post("/api/v1/register", async (req,res) => {
         res.status(500).send(error.toString())
     }
 });
+
+// route login 
+router.post("/api/v1/login", userController.userLogin)
 
 
 module.exports = router;
