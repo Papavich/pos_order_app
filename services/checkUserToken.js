@@ -12,7 +12,14 @@ const authenticateToken = async (req,res,next) => {
             console.log("decode user token = ");
             console.table(decode);
             // ต้องทำการเช็ค approve ก่อนด้วย
-            next();
+            if(decode.userApprove){
+                next();
+            } else {
+                return res.status(401).json({
+                    status: 401,
+                    message:"User Not Approved!"
+                });
+            }
         } else {
             console.log("invalid signature");
         }
