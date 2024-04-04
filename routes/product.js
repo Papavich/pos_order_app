@@ -20,5 +20,10 @@ router.put("/api/v1/products/:id", authenticateToken, productController.updatePr
 // delete product 
 router.delete("/api/v1/products/:id", authenticateToken, productController.deleteProduct);
 
+
+//show all product
+router.get("/api/v1/products", productController.showAllProducts) 
+
+
 // export product route
 module.exports = router;

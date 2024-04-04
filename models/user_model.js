@@ -23,10 +23,6 @@ const userSchema = new mongoose.Schema({
     userApprove: {
         type: Boolean,
         default: false
-    },
-    userToken: {
-        type: String,
-        default:""
     }
 },{timestamps: true});
 

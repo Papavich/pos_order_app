@@ -94,6 +94,23 @@ var productController = {
                 error
             })
         }
+    },
+    showAllProducts: async (req,res) => {
+        try {
+            
+            let allProductsInstance = await Product.find({});
+            // console.table(allProductsInstance);
+            res.status(201).json({
+                status : 201 ,
+                data: allProductsInstance
+            })
+        } catch(error) {
+            console.log(error);
+            res.status(400).json({
+                status: 400,
+                message:"Fails to Show All Products"
+            })
+        }
     }
 }
 
