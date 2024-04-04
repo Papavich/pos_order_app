@@ -18,7 +18,7 @@ var userController = {
             // เช็คในบานข้อมูลมี email หรือไม่
             let userInstance = await User.findOne({userEmail:userEmail})
             if(userInstance){
-
+                
                 // check approve
                 if(userInstance.userApprove){
                     // console.log("is user ", userInstance);
@@ -27,13 +27,13 @@ var userController = {
                     console.log("decode password = ", decodePassword);
                     if(decodePassword) {
                         // console.table(userInstance.userEmail, userInstance.userName);
-                        console.log(userInstance.userEmail);
-                        console.log(userInstance.userName);
+                        // console.log(userInstance.userEmail);
+                        // console.log(userInstance.userName);
 
                         // create token for user
-                        let token = await jwt.sign({userEmail:userInstance.userEmail, userName:userInstance.userName, userRole:userInstance.userRole}, SECRET, {algorithm: 'HS256'});
-                        console.log("token = ", token);
-
+                        let token = await jwt.sign({userEmail:userInstance.userEmail, userName:userInstance.userName, userRole:userInstance.userRole, userApprove:userInstance.userApprove}, SECRET, {algorithm: 'HS256'});
+                        // console.log("token = ", token);
+                        
                         // ถ้า password ถูก ให้ return ดังนี้
                         return res.status(200).json({
                         message:"Login Sucessful",

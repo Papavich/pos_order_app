@@ -2,15 +2,16 @@ const jwt = require("jsonwebtoken");
 const SECRET = "KFC"
 
 const authenticateToken = async (req,res,next) => {
-    // เข้าถึง token ที่ header
-    
-   
+  
+
     try {
+        // เข้าถึง token ที่ header
         const authHeader = req.header('authorization');
         let decode = await jwt.verify(authHeader, SECRET, { algorithms: 'HS256'});
         if(decode){
             console.log("decode user token = ");
             console.table(decode);
+            // ต้องทำการเช็ค approve ก่อนด้วย
             next();
         } else {
             console.log("invalid signature");
