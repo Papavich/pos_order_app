@@ -4,7 +4,7 @@ var bcrypt = require("bcrypt");
 
 // middleware
 const authenticateToken = require("../services/checkUserToken");
-
+const adminTokenCheck = require("../services/adminTokenCheck");
 // import model 
 const Users = require("../models/user_model");
 
@@ -33,7 +33,7 @@ router.post("/api/v1/register", async (req,res) => {
     // save model
     await user.save();
     res.json({
-        status:200,
+        status: 201,
         mesage: "create user successful",
         data: user 
     });
@@ -47,6 +47,9 @@ router.post("/api/v1/login", userController.userLogin);
 
 // approve by admin
 router.put("/api/v1/approve/:id", userController.userApprove);
+
+
+
 
 // user get data
 router.get("/api/v1/user-detail",authenticateToken, userController.userDetail );

@@ -74,8 +74,8 @@ var productController = {
             const productUpdateInstance = await Product.findByIdAndUpdate(id,{productName:productName, productAmount:productAmount, productPrice:productPrice});
             console.log(productUpdateInstance);
             if(productUpdateInstance) {
-                return res.status(201).json({
-                    status: 201,
+                return res.status(200).json({
+                    status: 200,
                     message:"Update product successful",
                     // data:
                 });
@@ -100,8 +100,8 @@ var productController = {
         try {
             let allProductsInstance = await Product.find({});
             // console.table(allProductsInstance);
-            res.status(201).json({
-                status : 201,
+            res.status(200).json({
+                status : 200,
                 data: allProductsInstance
             });
         } catch(error) {
@@ -121,9 +121,9 @@ var productController = {
             let productInstance = await Product.findById(id);
             console.log(productInstance);
             if(productInstance){
-                return  res.status(201).json({
-                        status: 201,
-                        message: "Successfully got the product by id",
+                return  res.status(200).json({
+                        status: 200,
+                        message: "Successfully product by id",
                         data: productInstance
                 });
             } else {
