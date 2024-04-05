@@ -40,7 +40,7 @@ var orderController = {
                 console.log(orderProductTotalPrice);
                 // create  new order
                 let order = new Order({
-                    productId,
+                    productId:id,
                     orderName,
                     orderProductAmount,
                     orderProductTotalPrice
@@ -81,12 +81,13 @@ var orderController = {
             // เรียกใช้งานโมเดล order 
             const orderInstance = await Order.find({});
             // console.log(orderInstance);
-            
-
+            const allOrderAndDetail = await Order.aggregate([{$lookup: {from: "products", localField:"productId", foreignField:"_id", as:"รายละเอียดสินค้า"}}])
+            console.log("allOrderAndDetail = ", allOrderAndDetail);
             res.status(201).json({
                 status: 201,
                 message: "fetch all orders complete",
-                data: orderInstance
+                data: orderInstance,
+                data2: allOrderAndDetail
             })
         } catch (error) {
             console.log(error);
@@ -101,26 +102,36 @@ var orderController = {
             // const id = req.params;
             const {id} = req.params
             //อย่าลืม destructuring ออกมาไม่งั้นมันจะเป็น object
-            console.log("id = ",id);
+            // console.log("id = ",id);
 
           
             // let findId = 660e683a03badeaf3f7f3ebd
-           
+
 
             let ordersByProductId = await Order.aggregate([
                 {$match: { productId: new mongoose.Types.ObjectId(id) }}
             ]);
-            console.log("ordersByProductId = ", ordersByProductId);
+            // console.log("ordersByProductId = ", ordersByProductId);
 
-            let allOrderIdProduct = await Product.findById(id);
-            // เอาเฉพาะ orders ออกมาโชว์
+            // let orderByProductIdWithProductDetail = await Order.aggregate([
+            //     {$lookup: {from: "products", localField: "productId", foreignField: "_id", as:"รายละเอียดสินค้า"}}
+            // ])
+
+            // console.log("orderByProductIdWithProductDetail = ", orderByProductIdWithProductDetail);
+
+
+            /*
+            
+                aggregate.lookup({ from: 'users', localField: 'userId', foreignField: '_id', as: 'users' });
+            
+            */
 
 
 
             // console.log(ordersByProductId);
-            res.status(201).json({
-                status: 201,
-                message: "hello order product",
+            res.status(200).json({
+                status: 200,
+                message: "Show orders by productId",
                 data: ordersByProductId
             })
         } catch (error) {
