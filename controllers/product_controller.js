@@ -3,14 +3,15 @@ const Product = require("../models/product_model");
 var productController = {
     addProduct: async (req,res)=> {
         try {
-            const {storeId, productName, productAmount} = req.body;
+            const {storeId, productName, productAmount, productPrice} = req.body;
             console.table(req.body);
 
             // เมื่อได้รับข้อมูลเข้ามาแล้วให้ทำการสร้าง new model 
             let product = new Product({
                 storeId,
                 productName,
-                productAmount
+                productAmount,
+                productPrice
             });
            let productInstance = await product.save();
 
@@ -66,11 +67,11 @@ var productController = {
             // console.log(id);
 
             // get dara from body
-            const {productName, productAmount} = req.body;
+            const {productName, productAmount, productPrice} = req.body;
             console.table(req.body);
 
             // find by id and update
-            const productUpdateInstance = await Product.findByIdAndUpdate(id,{productName:productName, productAmount:productAmount});
+            const productUpdateInstance = await Product.findByIdAndUpdate(id,{productName:productName, productAmount:productAmount, productPrice:productPrice});
             console.log(productUpdateInstance);
             if(productUpdateInstance) {
                 return res.status(201).json({

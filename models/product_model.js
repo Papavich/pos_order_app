@@ -13,7 +13,18 @@ const productSchema = new mongoose.Schema({
     productAmount: {
         type: Number,
         required: true,
-    }
+    },
+    productPrice: {
+        type: Number,
+        required: true,
+    },
+    orders: [
+        // ไว้สำหรับเก็บ order Id
+    
+            {type: mongoose.SchemaTypes.ObjectId, default:""},
+            
+    
+    ]
 },{timestamps: true});
 
 // create model 
