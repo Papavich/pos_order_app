@@ -10,8 +10,10 @@ router.post("/api/v1/products/:id/orders",authenticateToken,orderController.crea
 
 
 //show all order
-router.get() 
+router.get("/api/v1/orders", authenticateToken, orderController.showAllOrder); 
 
+// show orders by product id
+router.get("/api/v1/products/:id/orders",authenticateToken, orderController.showOrderByProductId);
 
 // export product route
 module.exports = router;

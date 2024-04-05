@@ -21,13 +21,13 @@ const authenticateToken = async (req,res,next) => {
                 });
             }
         } else {
-            console.log("invalid signature");
+            console.log("invalid signature or no token");
         }
     } catch (error) {
         console.log("invalid signature");
        return res.status(401).json({
             status: 401,
-            message:"invalid signature"
+            message:"invalid signature or no token"
 
         });
     }
