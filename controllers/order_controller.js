@@ -83,11 +83,11 @@ var orderController = {
             // console.log(orderInstance);
             const allOrderAndDetail = await Order.aggregate([{$lookup: {from: "products", localField:"productId", foreignField:"_id", as:"รายละเอียดสินค้า"}}])
             console.log("allOrderAndDetail = ", allOrderAndDetail);
-            res.status(201).json({
-                status: 201,
+            res.status(200).json({
+                status: 200,
                 message: "fetch all orders complete",
-                data: orderInstance,
-                data2: allOrderAndDetail
+                // data: orderInstance,
+                data: allOrderAndDetail
             })
         } catch (error) {
             console.log(error);
